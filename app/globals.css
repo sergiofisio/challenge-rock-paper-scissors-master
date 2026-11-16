@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-gold-500: hsl(39, 89%, 49%);
+  --color-gold-600: hsl(28, 76%, 44%);
+  --color-blue-500: hsl(230, 89%, 62%);
+  --color-blue-700: hsl(229, 64%, 46%);
+  --color-red-600: hsl(349, 71%, 52%);
+  --color-red-800: hsl(347, 75%, 35%);
+  --color-purple-600: hsl(261, 73%, 60%);
+  --color-purple-700: hsl(261, 51%, 44%);
+  --color-light-blue-400: hsl(189, 59%, 53%);
+  --color-light-blue-500: hsl(194, 58%, 42%);
+  --color-navy-900: hsl(229, 25%, 31%);
+  --color-gray-600: hsl(246, 11%, 37%);
+  --color-background: hsl(214, 47%, 23%);
+
+  --background-image-radial-bg: radial-gradient(circle at top, hsl(214, 47%, 23%), hsl(237, 48%, 15%));
+
+  --font-barlow: "Barlow Semi Condensed", sans-serif;
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: var(--font-barlow);
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
