@@ -1,36 +1,89 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Frontend Mentor - Rock, Paper, Scissors solution
 
-## Getting Started
+This is a solution to the [Rock, Paper, Scissors challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/rock-paper-scissors-game-pTgwgvgH). Frontend Mentor challenges help you improve your coding skills by building realistic projects.
 
-First, run the development server:
+## Table of contents
+
+- [Overview](#overview)
+  - [The challenge](#the-challenge)
+  - [Links](#links)
+- [My process](#my-process)
+  - [Built with](#built-with)
+  - [What I learned](#what-i-learned)
+  - [Continued development](#continued-development)
+  - [Useful resources](#useful-resources)
+- [Getting started](#getting-started)
+- [Author](#author)
+- [Acknowledgments](#acknowledgments)
+
+## Overview
+
+### The challenge
+
+Users should be able to:
+
+- View the optimal layout for the game depending on their device's screen size
+- Play **Rock, Paper, Scissors, Lizard, Spock** against the house
+- Follow the full match flow: pick → waiting → house reveal → result
+- See a winner glow on the winning hand and update the score
+- Keep the score after refreshing the browser (`localStorage`)
+- Open and close a rules modal
+
+### Links
+
+- Solution URL: [https://github.com/sergiofisio/challenge-rock-paper-scissors-master](https://github.com/sergiofisio/challenge-rock-paper-scissors-master)
+- Live Site URL: [https://sergiofisio.github.io/challenge-rock-paper-scissors-master/](https://sergiofisio.github.io/challenge-rock-paper-scissors-master/)
+
+## My process
+
+### Built with
+
+- Semantic HTML5 markup
+- CSS custom properties / design tokens
+- Flexbox and CSS Grid
+- Mobile-first responsive layout
+- [Next.js](https://nextjs.org/) (App Router) + TypeScript
+- [Tailwind CSS](https://tailwindcss.com/) v4
+- Client-side game state with timed step transitions
+- Static export + GitHub Actions → GitHub Pages
+
+### What I learned
+
+- Recreating the 3D token look with layered shadows: color lip under the ring, inset shadow on the white face, and soft ambient drop shadow
+- Modeling Rock–Paper–Scissors–Lizard–Spock win rules as a small lookup map instead of a long chain of conditionals
+- Keeping `localStorage` SSR-safe in Next.js by hydrating score in `useEffect` before writing back
+- Shipping a Next.js app to GitHub Pages with `output: "export"`, `basePath`, and a Pages workflow
+
+### Continued development
+
+- Closer pixel polish against mobile/tablet mocks
+- Motion for pick → result transitions
+- Optional classic (triangle) mode alongside the bonus pentagon
+
+### Useful resources
+
+- [Frontend Mentor challenge brief](https://www.frontendmentor.io/challenges/rock-paper-scissors-game-pTgwgvgH) — requirements and bonus rules
+- [Next.js static exports](https://nextjs.org/docs/app/guides/static-exports) — GitHub Pages-friendly build
+- [Big Bang Theory: Rock Paper Scissors Lizard Spock](https://bigbangtheory.fandom.com/wiki/Rock-Paper-Scissors-Lizard-Spock) — bonus hand relationships
+
+## Getting started
 
 ```bash
-npm run dev
-# or
+yarn install
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+yarn build   # static export to /out (set GITHUB_PAGES=true for Pages basePath)
+yarn lint
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Author
 
-## Learn More
+- GitHub - [@sergiofisio](https://github.com/sergiofisio)
 
-To learn more about Next.js, take a look at the following resources:
+## Acknowledgments
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Design and assets from [Frontend Mentor](https://www.frontendmentor.io)
