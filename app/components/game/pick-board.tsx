@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Hand from "@/app/components/hand";
 import type { HandType } from "@/lib/game";
+import { asset } from "@/lib/assets";
 
 const PICKS: { type: HandType; position: string }[] = [
   {
@@ -33,10 +34,10 @@ export default function PickBoard({
   return (
     <div className="relative mt-8 size-72 lg:mt-4 lg:size-104">
       <Image
-        src="/assets/images/bg-pentagon.svg"
+        src={asset("/assets/images/bg-pentagon.svg")}
         alt=""
         fill
-        className="object-contain p-8! lg:p-12!"
+        className="object-contain p-8 lg:p-12"
         aria-hidden
       />
 

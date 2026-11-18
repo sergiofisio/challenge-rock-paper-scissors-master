@@ -40,9 +40,9 @@ const RING: Record<HandType, { ring: string; shadow: string }> = {
 };
 
 const SIZE: Record<NonNullable<HandProps["size"]>, string> = {
-  sm: "size-28 p-3.5! lg:size-32 lg:p-4!",
-  md: "size-32 p-4! lg:size-40 lg:p-5!",
-  lg: "size-36 p-[1.1rem]! lg:size-52 lg:p-6!",
+  sm: "size-28 p-3.5 lg:size-32 lg:p-4",
+  md: "size-32 p-4 lg:size-40 lg:p-5",
+  lg: "size-36 p-[1.1rem] lg:size-52 lg:p-6",
 };
 
 export default function Hand({
@@ -57,10 +57,10 @@ export default function Hand({
   const tokenClass = `${SIZE[size]} relative z-10 rounded-full ${ring} ${shadow}`;
 
   const tokenInner = (
-    <span className="flex size-full items-center justify-center rounded-full bg-white shadow-[inset_0_5px_0_rgba(0,0,0,0.15)]">
+    <span className="flex size-full items-center justify-center rounded-full bg-token-face shadow-[inset_0_5px_0_rgba(0,0,0,0.15)]">
       <Image
         src={HAND_ICONS[type]}
-        alt={type}
+        alt=""
         width={64}
         height={64}
         className="pointer-events-none h-auto w-[45%]"
@@ -70,7 +70,7 @@ export default function Hand({
 
   return (
     <div
-      className={`flex items-center justify-center ${position || "relative"} ${className}`}
+      className={`isolate flex items-center justify-center ${position || "relative"} ${className}`}
     >
       {winner && (
         <span
@@ -93,9 +93,7 @@ export default function Hand({
           {tokenInner}
         </button>
       ) : (
-        <div className={tokenClass} aria-hidden>
-          {tokenInner}
-        </div>
+        <div className={tokenClass}>{tokenInner}</div>
       )}
     </div>
   );

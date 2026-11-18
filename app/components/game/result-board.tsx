@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect, useRef } from "react";
 import Hand from "@/app/components/hand";
 import type { GameResult, GameStep, HandType } from "@/lib/game";
 import { resultLabel } from "@/lib/game";
@@ -29,31 +32,6 @@ function Slot({
   );
 }
 
-function Outcome({
-  result,
-  onPlayAgain,
-  className = "",
-}: {
-  result: GameResult;
-  onPlayAgain: () => void;
-  className?: string;
-}) {
-  return (
-    <div className={`flex flex-col items-center gap-4 ${className}`}>
-      <h2 className="text-5xl font-bold tracking-wide text-white uppercase">
-        {resultLabel(result)}
-      </h2>
-      <button
-        type="button"
-        onClick={onPlayAgain}
-        className="rounded-lg bg-white px-12! py-3! text-sm font-bold tracking-[0.2em] text-navy-900 uppercase transition-colors hover:text-red-600 cursor-pointer"
-      >
-        Play again
-      </button>
-    </div>
-  );
-}
-
 export default function ResultBoard({
   step,
   player,
@@ -61,13 +39,28 @@ export default function ResultBoard({
   result,
   onPlayAgain,
 }: ResultBoardProps) {
+  const playAgainRef = useRef<HTMLButtonElement>(null);
   const showResult = step === "result" && result !== null;
   const playerWins = result === "win";
   const houseWins = result === "lose";
 
+  useEffect(() => {
+    if (showResult) playAgainRef.current?.focus();
+  }, [showResult]);
+
   return (
-    <div className="mt-10 flex w-full max-w-5xl flex-col items-center gap-10 lg:mt-16">
-      <div className="flex w-full items-center justify-center gap-6 sm:gap-12 lg:gap-16">
+    <div className="relative mt-10 flex w-full max-w-5xl flex-col items-center gap-10 lg:mt-16">
+      <p className="sr-only" aria-live="polite">
+        {showResult && house && result
+          ? `You picked ${player}. The house picked ${house}. ${resultLabel(result)}.`
+          : step === "waiting"
+            ? `You picked ${player}. Waiting for the house.`
+            : house
+              ? `You picked ${player}. The house picked ${house}.`
+              : ""}
+      </p>
+
+      <div className="flex w-full items-center justify-center gap-6 sm:gap-12 lg:gap-20">
         <Slot label="You picked">
           <Hand
             type={player}
@@ -75,14 +68,6 @@ export default function ResultBoard({
             winner={showResult ? playerWins : false}
           />
         </Slot>
-
-        {showResult && (
-          <Outcome
-            result={result}
-            onPlayAgain={onPlayAgain}
-            className="hidden lg:flex"
-          />
-        )}
 
         <Slot label="The house picked">
           {step === "waiting" || !house ? (
@@ -95,18 +80,26 @@ export default function ResultBoard({
               type={house}
               size="lg"
               winner={showResult ? houseWins : false}
-              className="animate-[fade-in_0.35s_ease-out]"
+              className="animate-[fade-in_0.35s_ease-out] motion-reduce:animate-none"
             />
           )}
         </Slot>
       </div>
 
       {showResult && (
-        <Outcome
-          result={result}
-          onPlayAgain={onPlayAgain}
-          className="lg:hidden"
-        />
+        <div className="flex flex-col items-center gap-4 lg:absolute lg:top-1/2 lg:left-1/2 lg:-translate-x-1/2 lg:-translate-y-1/2">
+          <h2 className="text-5xl font-bold tracking-wide text-white uppercase">
+            {resultLabel(result)}
+          </h2>
+          <button
+            type="button"
+            ref={playAgainRef}
+            onClick={onPlayAgain}
+            className="cursor-pointer rounded-lg bg-white px-12 py-3 text-sm font-bold tracking-[0.2em] text-navy-900 uppercase transition-colors hover:text-red-600"
+          >
+            Play again
+          </button>
+        </div>
       )}
     </div>
   );

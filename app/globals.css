@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
 @import "tailwindcss";
 
 @theme {
@@ -15,17 +14,21 @@
   --color-navy-900: hsl(229, 25%, 31%);
   --color-gray-600: hsl(246, 11%, 37%);
   --color-background: hsl(214, 47%, 23%);
+  --color-token-face: hsl(0, 0%, 94%);
 
-  --background-image-radial-bg: radial-gradient(circle at top, hsl(214, 47%, 23%), hsl(237, 48%, 15%));
+  --background-image-radial-bg: radial-gradient(
+    circle at top,
+    hsl(214, 47%, 23%),
+    hsl(237, 48%, 15%)
+  );
 
-  --font-barlow: "Barlow Semi Condensed", sans-serif;
+  --font-barlow: var(--font-barlow-face), "Barlow Semi Condensed", sans-serif;
 }
 
-*{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: var(--font-barlow);
+@layer base {
+  body {
+    font-family: var(--font-barlow);
+  }
 }
 
 @keyframes fade-in {

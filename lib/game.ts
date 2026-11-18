@@ -1,3 +1,5 @@
+import { asset } from "@/lib/assets";
+
 export type HandType = "rock" | "paper" | "scissors" | "lizard" | "spock";
 export type GameResult = "win" | "lose" | "draw";
 export type GameStep = "pick" | "waiting" | "reveal" | "result";
@@ -11,14 +13,14 @@ export const HANDS: HandType[] = [
 ];
 
 export const HAND_ICONS: Record<HandType, string> = {
-  rock: "/assets/images/icon-rock.svg",
-  paper: "/assets/images/icon-paper.svg",
-  scissors: "/assets/images/icon-scissors.svg",
-  lizard: "/assets/images/icon-lizard.svg",
-  spock: "/assets/images/icon-spock.svg",
+  rock: asset("/assets/images/icon-rock.svg"),
+  paper: asset("/assets/images/icon-paper.svg"),
+  scissors: asset("/assets/images/icon-scissors.svg"),
+  lizard: asset("/assets/images/icon-lizard.svg"),
+  spock: asset("/assets/images/icon-spock.svg"),
 };
 
-/** Cada mão vence estas duas. */
+/** Each hand beats these two. */
 const BEATS: Record<HandType, HandType[]> = {
   rock: ["scissors", "lizard"],
   paper: ["rock", "spock"],

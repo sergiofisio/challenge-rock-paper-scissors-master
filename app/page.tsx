@@ -6,6 +6,7 @@ import PickBoard from "./components/game/pick-board";
 import ResultBoard from "./components/game/result-board";
 import Rules from "./components/modal/rules";
 import Text from "./components/text";
+import { asset } from "@/lib/assets";
 import {
   computerChoice,
   determineWinner,
@@ -23,6 +24,7 @@ export default function Home() {
   const [rulesOpen, setRulesOpen] = useState(false);
   const [hydrated, setHydrated] = useState(false);
   const timers = useRef<number[]>([]);
+  const rulesButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const saved = localStorage.getItem("score");
@@ -83,18 +85,25 @@ export default function Home() {
     setResult(null);
   }
 
+  function handleRulesClose() {
+    setRulesOpen(false);
+    rulesButtonRef.current?.focus();
+  }
+
   return (
-    <main className="relative flex min-h-screen w-full flex-col items-center gap-8 bg-radial-bg px-6! py-8! lg:gap-12 lg:py-12!">
-      <header className="flex w-full max-w-176 items-center justify-between rounded-2xl border-[3px] border-gray-600 px-4! py-3! lg:rounded-3xl lg:px-6! lg:py-4!">
-        <Image
-          src="/assets/images/logo-bonus.svg"
-          alt="Rock Paper Scissors Lizard Spock"
-          width={110}
-          height={110}
-          className="h-16 w-auto lg:h-28"
-          priority
-        />
-        <div className="flex min-w-22 flex-col items-center justify-center rounded-lg bg-white px-5! py-2.5! lg:min-w-36 lg:rounded-xl lg:px-8! lg:py-4!">
+    <main className="relative flex min-h-screen w-full flex-col items-center gap-8 overflow-x-clip bg-radial-bg px-6 py-8 lg:gap-12 lg:py-12">
+      <header className="flex w-full max-w-176 items-center justify-between rounded-2xl border-[3px] border-gray-600 px-4 py-3 lg:rounded-3xl lg:px-6 lg:py-4">
+        <h1>
+          <Image
+            src={asset("/assets/images/logo-bonus.svg")}
+            alt="Rock Paper Scissors Lizard Spock"
+            width={110}
+            height={110}
+            className="h-16 w-auto lg:h-28"
+            priority
+          />
+        </h1>
+        <div className="flex min-w-22 flex-col items-center justify-center rounded-lg bg-white px-5 py-2.5 lg:min-w-36 lg:rounded-xl lg:px-8 lg:py-4">
           <Text
             className="text-[0.65rem] tracking-[0.15em] text-blue-700"
             label="score"
@@ -119,16 +128,15 @@ export default function Home() {
       )}
 
       <button
+        ref={rulesButtonRef}
         type="button"
-        className="mt-auto self-center rounded-lg border-2 border-white/60 px-9! py-2.5! tracking-[0.2em] text-white uppercase transition-colors hover:bg-white hover:text-navy-900 lg:absolute lg:right-8 lg:bottom-8 lg:mt-0 cursor-pointer"
+        className="mt-auto cursor-pointer self-center rounded-lg border-2 border-white/60 px-9 py-2.5 tracking-[0.2em] text-white uppercase transition-colors hover:bg-white hover:text-navy-900 lg:absolute lg:right-8 lg:bottom-8 lg:mt-0"
         onClick={() => setRulesOpen(true)}
       >
         Rules
       </button>
 
-      {rulesOpen && (
-        <Rules open={rulesOpen} onClose={() => setRulesOpen(false)} />
-      )}
+      <Rules open={rulesOpen} onClose={handleRulesClose} />
     </main>
   );
 }
