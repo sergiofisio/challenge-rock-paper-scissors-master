@@ -6,6 +6,7 @@ This is a solution to the [Rock, Paper, Scissors challenge on Frontend Mentor](h
 
 - [Overview](#overview)
   - [The challenge](#the-challenge)
+  - [Screenshot](#screenshot)
   - [Links](#links)
 - [My process](#my-process)
   - [Built with](#built-with)
@@ -29,6 +30,12 @@ Users should be able to:
 - Keep the score after refreshing the browser (`localStorage`)
 - Open and close a rules modal
 
+### Screenshot
+
+![Desktop pick screen](./docs/desktop-preview.jpg)
+
+![Desktop result screen](./docs/desktop-result.jpg)
+
 ### Links
 
 - Solution URL: [https://github.com/sergiofisio/challenge-rock-paper-scissors-master](https://github.com/sergiofisio/challenge-rock-paper-scissors-master)
@@ -44,15 +51,18 @@ Users should be able to:
 - Mobile-first responsive layout
 - [Next.js](https://nextjs.org/) (App Router) + TypeScript
 - [Tailwind CSS](https://tailwindcss.com/) v4
-- Client-side game state with timed step transitions
+- Vitest for unit tests on game rules and score storage
+- Discriminated `GamePhase` + `useGame` hook for match flow
 - Static export + GitHub Actions → GitHub Pages
 
 ### What I learned
 
-- Recreating the 3D token look with layered shadows: color lip under the ring, inset shadow on the white face, and soft ambient drop shadow
+- Recreating the 3D token look with layered shadows: color lip under the ring, inset shadow on the face, and soft ambient drop shadow
 - Modeling Rock–Paper–Scissors–Lizard–Spock win rules as a small lookup map instead of a long chain of conditionals
-- Keeping `localStorage` SSR-safe in Next.js by hydrating score in `useEffect` before writing back
+- Keeping score persistence SSR-safe and resilient when `localStorage` throws (private browsing)
 - Shipping a Next.js app to GitHub Pages with `output: "export"`, `basePath`, and a Pages workflow
+
+One hard problem: on GitHub Pages every image 404’d because `next/image` does not prefix root-relative `src` with `basePath`. The fix was a tiny `asset()` helper that prepends `NEXT_PUBLIC_BASE_PATH`, used for icons, logo, pentagon, rules art, and the favicon. Without that, the live tokens looked like empty circles even though local `yarn dev` was fine.
 
 ### Continued development
 
@@ -76,6 +86,7 @@ yarn dev
 Open [http://localhost:3000](http://localhost:3000).
 
 ```bash
+yarn test
 yarn build   # static export to /out (set GITHUB_PAGES=true for Pages basePath)
 yarn lint
 ```
