@@ -1,4 +1,4 @@
-export default function Text({
+export default function ScoreLabel({
   label,
   className,
 }: {

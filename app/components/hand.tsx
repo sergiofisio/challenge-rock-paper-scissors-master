@@ -40,9 +40,9 @@ const RING: Record<HandType, { ring: string; shadow: string }> = {
 };
 
 const SIZE: Record<NonNullable<HandProps["size"]>, string> = {
-  sm: "size-28 p-3.5 lg:size-32 lg:p-4",
-  md: "size-32 p-4 lg:size-40 lg:p-5",
-  lg: "size-36 p-[1.1rem] lg:size-52 lg:p-6",
+  sm: "size-[min(22vw,7rem)] p-3 lg:size-32 lg:p-4",
+  md: "size-28 p-3.5 sm:size-32 sm:p-4 lg:size-40 lg:p-5",
+  lg: "size-24 p-2.5 sm:size-32 sm:p-4 lg:size-52 lg:p-6",
 };
 
 export default function Hand({

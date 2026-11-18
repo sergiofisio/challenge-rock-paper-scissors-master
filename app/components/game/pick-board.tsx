@@ -32,12 +32,12 @@ export default function PickBoard({
   onPick: (hand: HandType) => void;
 }) {
   return (
-    <div className="relative mt-8 size-72 lg:mt-4 lg:size-104">
+    <div className="relative mt-8 size-[min(72vw,18rem)] lg:mt-4 lg:size-104">
       <Image
         src={asset("/assets/images/bg-pentagon.svg")}
         alt=""
         fill
-        className="object-contain p-8 lg:p-12"
+        className="object-contain p-[12%] lg:p-12"
         aria-hidden
       />
 
